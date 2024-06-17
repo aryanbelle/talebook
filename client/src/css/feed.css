@@ -6,7 +6,7 @@
 .scroll-container::-webkit-scrollbar {
     display: none;  /* Chrome, Safari, and Opera */
 }
-.recent-story-card{
+.recent-story-card, .new-story-card{
     height: 200px;
     min-width: 170px;
 }

@@ -13,7 +13,7 @@ function Recent() {
           return (
             <div className="recent-story-card  bg-card-bg">
             <div className="">
-              <div className="card-cover">
+              <div className="card-cover h-[80%]">
                 <img src={story.coverimg} className="w-full h-full" />
               </div>
               <div className="card-title">{story.title}</div>

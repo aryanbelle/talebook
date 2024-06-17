@@ -7,7 +7,6 @@ export const handleSignIn = () => {
         })
         .catch((error) => {
             console.log('Error during sign-in: ', error);
-            throw error;
         });
 };
 

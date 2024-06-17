@@ -31,22 +31,23 @@ const Signup = () => {
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-black">
-      <div className="bg-black border-2 border-primary-grey-500 p-8 rounded-lg shadow-md w-full max-w-md m-4">
+      <div className="bg-primary-grey-500 border-2 border-primary-grey-500 p-8 rounded-lg shadow-md w-full max-w-md m-4">
         <h2 className="text-2xl font-bold mb-6 text-center text-primary-red-500">
           Create account
         </h2>
         <form>
           <div className="mb-4">
             <label
-              className="block text-gray-200 text-sm font-bold mb-2"
+              className="block text-gray-200 text-sm  mb-2"
               htmlFor="username"
             >
               Username
             </label>
-            <div className="flex items-center border rounded shadow appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <div className="flex items-center border rounded-lg border-1 border-zinc-500 shadow bg-primary-grey-500 appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+          
               <UserIcon className="h-5 w-5 text-gray-400 mr-2" />
               <input
-                className="flex-grow focus:outline-none p-1"
+                className="flex-grow focus:outline-none p-1 bg-transparent text-white"
                 id="username"
                 type="text"
                 placeholder="Enter a username"
@@ -55,15 +56,15 @@ const Signup = () => {
           </div>
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-gray-200 text-sm mb-2"
               htmlFor="email"
             >
               Email
             </label>
-            <div className="flex items-center border rounded shadow appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-              <EnvelopeIcon className="h-5 w-5 text-gray-400 mr-2" />
+            <div className="flex items-center border rounded-lg border-1 border-zinc-500 shadow bg-primary-grey-500 appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+              <EnvelopeIcon className="h-5 w-5 text-gray-200 mr-2" />
               <input
-                className="flex-grow focus:outline-none"
+                className="flex-grow focus:outline-none p-1 bg-transparent text-white"
                 id="email"
                 type="email"
                 placeholder="Enter your email"
@@ -72,29 +73,24 @@ const Signup = () => {
           </div>
           <div className="mb-6">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-gray-200 text-sm mb-2"
               htmlFor="password"
             >
               Password
             </label>
-            <div className="flex items-center border rounded shadow appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-              <LockClosedIcon className="h-5 w-5 text-gray-400 mr-2" />
+            <div className="flex items-center border rounded-lg border-1 border-zinc-500 shadow bg-primary-grey-500 appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+              <LockClosedIcon className="h-5 w-5 text-gray-200 mr-2" />
               <input
-                className="flex-grow focus:outline-none p-1"
+                className="flex-grow focus:outline-none p-1 bg-transparent text-white"
                 id="password"
                 type="password"
                 placeholder="Enter a password"
               />
             </div>
           </div>
-          <div className="mb-4 text-right">
-            <a href="#" className="text-violet-500 text-sm">
-              Forgot password?
-            </a>
-          </div>
           <div className="flex items-center justify-center">
             <button
-              className="bg-violet-700 hover:bg-violet-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline bg-primary-blue bg-primary-red-500 hover:bg-primary-red-700"
               type="button"
             >
               Create account
@@ -107,7 +103,7 @@ const Signup = () => {
           </div>
           <div className="flex items-center justify-center">
             <button
-              className="bg-white border border-gray-300 hover:bg-gray-100 text-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center"
+              className="border-2 border-zinc-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center"
               type="button"
               onClick={handleSignIn}
             >
@@ -121,9 +117,9 @@ const Signup = () => {
               Continue with Google
             </button>
           </div>
-          <div className="text-sm mt-8 text-center">
+          <div className="text-sm text-white mt-8 text-center">
             Already have an account?
-            <a href="#" className="text-violet-500 ml-2">
+            <a href="#" className="text-primary-red-500 ml-2">
               Sign in
             </a>
           </div>

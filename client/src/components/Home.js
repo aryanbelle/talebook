@@ -7,15 +7,18 @@ import Favorites from './Favorites';
 import Recommendations from './Recommendations';
 import Popular from "./Popular";
 import Profile from "./Profile";
+import Tabs from "./Tabs";
 
 function Home() {
   const pathname = useLocation().pathname;
   return (
       <div className="flex flex-col min-h-screen bg-black">
         <Navbar />
+      <Tabs/>
+  <div className="flex">
+      <Sidebar />
         <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
         
-      <Sidebar className="" />
           <div className="flex-1 flex flex-col items-center overflow-y-auto">
             <Routes>
               <Route path="/feed" element={<Feed />} />
@@ -25,7 +28,7 @@ function Home() {
             </Routes>
           </div>
           {pathname!=="/profile"?<Recommendations/>:null}
-        </div>
+        </div></div>
       </div>
   );
 }

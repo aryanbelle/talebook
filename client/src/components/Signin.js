@@ -29,7 +29,7 @@ const Signin = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black">
-      <div className="bg-black border-2 border-primary-grey-500 p-8 rounded-lg w-full max-w-sm">
+      <div className="bg-primary-grey-500 border-2 border-primary-grey-500 p-8 rounded-lg w-full max-w-sm">
         <h2 className="text-2xl font-bold mb-6 text-center text-primary-red-500">
           Login
         </h2>
@@ -41,7 +41,7 @@ const Signin = () => {
             >
               Username or Email
             </label>
-            <div className="flex items-center border rounded-lg border-1 border-zinc-500 shadow bg-primary-grey-500 appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <div className="flex items-center border rounded-lg border-1 border-zinc-500 shadow appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
               <UserIcon className="h-5 w-5 text-gray-200 mr-2" />
               <input
                 className="flex-grow focus:outline-none p-1 bg-transparent text-white"
