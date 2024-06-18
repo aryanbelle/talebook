@@ -3,14 +3,25 @@ import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [activeLink, setActiveLink] = useState("Home");
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const toggleMobileMenu = () => {
     setShowMobileMenu(!showMobileMenu);
+  };
+
+  const handleLinkClick = (link) => {
+    setActiveLink(link);
+  };
+
+  const linkClasses = (link) => {
+    return `text-sm px-3 py-2 rounded-md ${
+      activeLink === link ? "text-primary-red-500" : "text-white"
+    } hover:text-primary-red`;
   };
 
   return (
@@ -21,18 +32,16 @@ const Navbar = () => {
             <div className="text-2xl font-bold text-white">TaleBook</div>
             <div className="hidden md:block lg:block">
               <div className="ml-10 flex items-baseline space-x-4">
-                <a href="#" className="text-white px-3 py-2 rounded-md text-sm">
-                  Home
-                </a>
-                <a href="#" className="text-white px-3 py-2 rounded-md text-sm">
-                  About
-                </a>
-                <a href="#" className="text-white px-3 py-2 rounded-md text-sm">
-                  Services
-                </a>
-                <a href="#" className="text-white px-3 py-2 rounded-md text-sm">
-                  Contact
-                </a>
+                {["Home", "About", "Services", "Contact"].map((link) => (
+                  <a
+                    key={link}
+                    href="#"
+                    className={linkClasses(link)}
+                    onClick={() => handleLinkClick(link)}
+                  >
+                    {link}
+                  </a>
+                ))}
               </div>
             </div>
           </div>
@@ -58,15 +67,17 @@ const Navbar = () => {
           <div></div>
           <div>
             <div className="float-right md:hidden lg:hidden w-8 h-8">
-              <Bars3Icon className="text-white" onClick={toggleMobileMenu}/>
+              <Bars3Icon className="text-white" onClick={toggleMobileMenu} />
             </div>
           </div>
-          <div className="md:hidden lg:hidden"><MagnifyingGlassIcon className="h-5 w-5 text-gray-200" /></div>
+          <div className="md:hidden lg:hidden">
+            <MagnifyingGlassIcon className="h-5 w-5 text-gray-200" />
+          </div>
           <div className="ml-3 relative">
             <div>
               <button
                 onClick={toggleMenu}
-                className="max-w-xs bg-white rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-red-500"
+                className="max-w-xs bg-card-bg rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-red-500"
                 id="user-menu"
                 aria-haspopup="true"
               >
@@ -80,28 +91,28 @@ const Navbar = () => {
             </div>
             {showMenu && (
               <div
-                className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-card-bg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="user-menu"
               >
                 <a
                   href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-red-500 hover:text-white"
+                  className="block px-4 py-2 text-sm text-white hover:bg-primary-red-500 hover:text-white"
                   role="menuitem"
                 >
                   Your Profile
                 </a>
                 <a
                   href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-red-500 hover:text-white"
+                  className="block px-4 py-2 text-sm text-white hover:bg-primary-red-500 hover:text-white"
                   role="menuitem"
                 >
                   Settings
                 </a>
                 <a
                   href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-primary-red-500 hover:text-white"
+                  className="block px-4 py-2 text-sm text-white hover:bg-primary-red-500 hover:text-white"
                   role="menuitem"
                 >
                   Sign out
@@ -114,30 +125,18 @@ const Navbar = () => {
       {showMobileMenu && (
         <div className="lg:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a
-              href="#"
-              className="text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Home
-            </a>
-            <a
-              href="#"
-              className="text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              About
-            </a>
-            <a
-              href="#"
-              className="text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Services
-            </a>
-            <a
-              href="#"
-              className="text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Contact
-            </a>
+            {["Home", "About", "Services", "Contact"].map((link) => (
+              <a
+                key={link}
+                href="#"
+                className={`text-white block px-3 py-2 rounded-md text-base font-medium ${
+                  activeLink === link ? "bg-primary-red-500" : ""
+                }`}
+                onClick={() => handleLinkClick(link)}
+              >
+                {link}
+              </a>
+            ))}
           </div>
         </div>
       )}

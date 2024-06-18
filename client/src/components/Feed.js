@@ -10,11 +10,11 @@ function Feed() {
       className="scroll-container m-5 bg-primary-grey-500 text-gray-200 shadow-lg  w-full lg:w-1/2 min-h-[82vh] max-h-[80vh] overflow-y-auto"
     >
       <div className="recent-stories-container flex justify-center">
-      <Recent/>
+        <Recent />
       </div>
       <div className="newpost-container flex justify-center">
-        <NewPosts/>
-        </div>
+        <NewPosts />
+      </div>
     </div>
   );
 }

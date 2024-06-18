@@ -18,7 +18,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="m-5 bg-white shadow-lg flex justify-center items-center w-full lg:w-1/2 min-h-[80vh] min-w-[70vw]">
+    <div className="m-5 bg-primary-grey-500 text-white shadow-lg flex justify-center items-center w-full lg:w-1/2 min-h-[80vh] min-w-[70vw]">
       <div style={{width: "80%"}}>
         {/* Profile Picture and Full Name */}
         <div className="flex items-center space-x-4 mb-8">
@@ -29,14 +29,14 @@ const Profile = () => {
           />
           <div>
             <h2 className="text-3xl font-bold">{user.fullName}</h2>
-            <p className="text-gray-600">@{user.username}</p>
+            <p className="text-gray-200">@{user.username}</p>
           </div>
         </div>
 
         {/* Email */}
         <div className="mb-4">
-          <p className="text-gray-700">
-            <span className="text-sm text-gray-500">Email:</span> {user.email}
+          <p className="text-gray-200">
+            <span className="text-sm">Email:</span> {user.email}
           </p>
         </div>
 
@@ -44,11 +44,11 @@ const Profile = () => {
         <div className="flex items-center space-x-8 mb-8">
           <div className="text-center">
             <p className="text-xl font-bold">{user.followingCount}</p>
-            <p className="text-gray-600">Following</p>
+            <p className="text-gray-200">Following</p>
           </div>
           <div className="text-center">
             <p className="text-xl font-bold">{user.followersCount}</p>
-            <p className="text-gray-600">Followers</p>
+            <p className="text-gray-200">Followers</p>
           </div>
         </div>
 
@@ -56,12 +56,12 @@ const Profile = () => {
         <div>
           <h3 className="text-xl font-bold mb-4">Stories</h3>
           {user.stories.map((story) => (
-            <div key={story.id} className="bg-gray-200 p-4 rounded-lg mb-4">
+            <div key={story.id} className="bg-card-bg p-4 rounded-lg mb-4">
               <p>{story.text}</p>
             </div>
           ))}
           {user.stories.length === 0 && (
-            <p className="text-gray-600">No stories uploaded yet.</p>
+            <p className="text-gray-200">No stories uploaded yet.</p>
           )}
         </div>
       </div>

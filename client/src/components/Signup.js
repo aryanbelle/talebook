@@ -1,15 +1,28 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   EnvelopeIcon,
   InboxIcon,
   LockClosedIcon,
   UserIcon,
 } from "@heroicons/react/24/solid";
-import { handleSignIn, handleSignOut } from "../auth/Auth";
+import {
+  handleSignInWithGoogle,
+  handleSignOut,
+  HandleSignUpWithEmail,
+} from "../auth/Auth";
 import { auth } from "../auth/firebase";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [user, setUser] = useState(null);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handlePasswordChange = (e) => setPassword(e.target.value);
+  const handleUsernameChange = (e) => setUsername(e.target.value);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -19,7 +32,7 @@ const Signup = () => {
   }, []);
 
   const signIn = () => {
-    handleSignIn()
+    handleSignInWithGoogle()
       .then((user) => setUser(user))
       .catch((error) => console.error("Sign-in error: ", error));
   };
@@ -29,13 +42,18 @@ const Signup = () => {
       .then(() => setUser(null))
       .catch((error) => console.error("Sign-out error: ", error));
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    HandleSignUpWithEmail(email, password, username);
+    // alert(username)
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-black">
       <div className="bg-primary-grey-500 border-2 border-primary-grey-500 p-8 rounded-lg shadow-md w-full max-w-md m-4">
         <h2 className="text-2xl font-bold mb-6 text-center text-primary-red-500">
           Create account
         </h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
               className="block text-gray-200 text-sm  mb-2"
@@ -43,30 +61,30 @@ const Signup = () => {
             >
               Username
             </label>
-            <div className="flex items-center border rounded-lg border-1 border-zinc-500 shadow bg-primary-grey-500 appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-          
+            <div className="flex items-center border rounded-xl border-1 border-zinc-500 shadow bg-primary-grey-500 appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
               <UserIcon className="h-5 w-5 text-gray-400 mr-2" />
               <input
                 className="flex-grow focus:outline-none p-1 bg-transparent text-white"
                 id="username"
                 type="text"
+                required
+                onChange={handleUsernameChange}
                 placeholder="Enter a username"
               />
             </div>
           </div>
           <div className="mb-4">
-            <label
-              className="block text-gray-200 text-sm mb-2"
-              htmlFor="email"
-            >
+            <label className="block text-gray-200 text-sm mb-2" htmlFor="email">
               Email
             </label>
-            <div className="flex items-center border rounded-lg border-1 border-zinc-500 shadow bg-primary-grey-500 appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <div className="flex items-center border rounded-xl border-1 border-zinc-500 shadow bg-primary-grey-500 appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
               <EnvelopeIcon className="h-5 w-5 text-gray-200 mr-2" />
               <input
                 className="flex-grow focus:outline-none p-1 bg-transparent text-white"
                 id="email"
                 type="email"
+                required
+                onChange={handleEmailChange}
                 placeholder="Enter your email"
               />
             </div>
@@ -78,12 +96,14 @@ const Signup = () => {
             >
               Password
             </label>
-            <div className="flex items-center border rounded-lg border-1 border-zinc-500 shadow bg-primary-grey-500 appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <div className="flex items-center border rounded-xl border-1 border-zinc-500 shadow bg-primary-grey-500 appearance-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
               <LockClosedIcon className="h-5 w-5 text-gray-200 mr-2" />
               <input
                 className="flex-grow focus:outline-none p-1 bg-transparent text-white"
                 id="password"
                 type="password"
+                required
+                onChange={handlePasswordChange}
                 placeholder="Enter a password"
               />
             </div>
@@ -91,7 +111,7 @@ const Signup = () => {
           <div className="flex items-center justify-center">
             <button
               className="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline bg-primary-blue bg-primary-red-500 hover:bg-primary-red-700"
-              type="button"
+              type="submit"
             >
               Create account
             </button>
@@ -105,7 +125,7 @@ const Signup = () => {
             <button
               className="border-2 border-zinc-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center"
               type="button"
-              onClick={handleSignIn}
+              onClick={handleSignInWithGoogle}
             >
               <img
                 width="20"
@@ -119,9 +139,9 @@ const Signup = () => {
           </div>
           <div className="text-sm text-white mt-8 text-center">
             Already have an account?
-            <a href="#" className="text-primary-red-500 ml-2">
+            <Link to="/" className="text-primary-red-500 ml-2">
               Sign in
-            </a>
+            </Link>
           </div>
         </form>
       </div>
