@@ -1,40 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { LockClosedIcon, UserIcon } from "@heroicons/react/24/solid";
-import {
-  handleSignInWithGoogle,
-  handleSignOut,
-  handleSignInWithEmail,
-} from "../auth/Auth";
-import { auth } from "../auth/firebase";
 import { Link } from "react-router-dom";
 
 const Signin = () => {
-  const [user, setUser] = useState(null);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  const signIn = () => {
-    handleSignInWithGoogle()
-      .then((user) => setUser(user))
-      .catch((error) => console.error("Sign-in error: ", error));
-  };
-
-  const signOut = () => {
-    handleSignOut()
-      .then(() => setUser(null))
-      .catch((error) => console.error("Sign-out error: ", error));
-  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black">
@@ -93,7 +67,6 @@ const Signin = () => {
             <button
               className="text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline bg-primary-blue bg-primary-red-500 hover:bg-primary-red-700 w-60"
               type="button"
-              onClick={() => handleSignInWithEmail(email, password)}
             >
               Login
             </button>
@@ -107,7 +80,6 @@ const Signin = () => {
             <button
               className="border-2 border-zinc-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center"
               type="button"
-              onClick={handleSignInWithGoogle}
             >
               <img
                 width="20"

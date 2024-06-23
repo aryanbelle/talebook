@@ -1,59 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   EnvelopeIcon,
-  InboxIcon,
   LockClosedIcon,
   UserIcon,
 } from "@heroicons/react/24/solid";
-import {
-  handleSignInWithGoogle,
-  handleSignOut,
-  HandleSignUpWithEmail,
-} from "../auth/Auth";
-import { auth } from "../auth/firebase";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-const Signup = () => {
-  const [user, setUser] = useState(null);
-
+function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
 
+  const handleUsernameChange = (e) => setUsername(e.target.value);
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
-  const handleUsernameChange = (e) => setUsername(e.target.value);
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
-    });
-    return () => unsubscribe();
-  }, []);
+  async function handleSignUp(e) {
+    try {
+      const response = await axios.get(
+        "https://46238f45-25b9-4a93-873e-45074ad18b4a-00-nou2r0i8arjh.riker.replit.dev:8000/auth/signup",
+        { username, email, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+      alert(`Sign up successful! Status: ${response.status}`);
+    } catch (error) {
+      alert(`Sign up failed! Error: ${error.message}`);
+    }
+  }
 
-  const signIn = () => {
-    handleSignInWithGoogle()
-      .then((user) => setUser(user))
-      .catch((error) => console.error("Sign-in error: ", error));
-  };
-
-  const signOut = () => {
-    handleSignOut()
-      .then(() => setUser(null))
-      .catch((error) => console.error("Sign-out error: ", error));
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    HandleSignUpWithEmail(email, password, username);
-    // alert(username)
-  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-black">
       <div className="bg-primary-grey-500 border-2 border-primary-grey-500 p-8 rounded-lg shadow-md w-full max-w-md m-4">
         <h2 className="text-2xl font-bold mb-6 text-center text-primary-red-500">
           Create account
         </h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSignUp}>
           <div className="mb-4">
             <label
               className="block text-gray-200 text-sm  mb-2"
@@ -68,6 +54,7 @@ const Signup = () => {
                 id="username"
                 type="text"
                 required
+                value={username}
                 onChange={handleUsernameChange}
                 placeholder="Enter a username"
               />
@@ -84,6 +71,7 @@ const Signup = () => {
                 id="email"
                 type="email"
                 required
+                value={email}
                 onChange={handleEmailChange}
                 placeholder="Enter your email"
               />
@@ -103,6 +91,7 @@ const Signup = () => {
                 id="password"
                 type="password"
                 required
+                value={password}
                 onChange={handlePasswordChange}
                 placeholder="Enter a password"
               />
@@ -125,7 +114,6 @@ const Signup = () => {
             <button
               className="border-2 border-zinc-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center"
               type="button"
-              onClick={handleSignInWithGoogle}
             >
               <img
                 width="20"
@@ -147,6 +135,6 @@ const Signup = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Signup;
